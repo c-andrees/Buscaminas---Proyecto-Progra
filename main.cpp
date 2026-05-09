@@ -12,7 +12,7 @@ int main() {
     const int TAM = 50;
 
     sf::RenderWindow window(
-        sf::VideoMode({700, 700}),
+        sf::VideoMode({800, 800}),
         "Buscaminas");
 
     sf::Font font;
