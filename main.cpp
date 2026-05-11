@@ -9,10 +9,10 @@ int main() {
 
     srand(time(0));
 
-    const int TAM = 50;
+    const int TAM = 60;
 
     sf::RenderWindow window(
-        sf::VideoMode({800, 800}),
+        sf::VideoMode({700, 700}),
         "Buscaminas");
 
     sf::Font font;
@@ -41,10 +41,18 @@ int main() {
                 if (x >= 0 && x < COLUMNAS &&
                     y >= 0 && y < FILAS) {
 
-                    destapar(y, x);
+                    if(mouse->button == sf::Mouse::Button::Right) {
+                        toggleBandera(y, x);
+                    }
+                    else {
+                        destapar(y, x);
 
-                    if (minas[y][x]) {
-                        std::cout << "💣 PERDISTE\n";
+                        if (minas[y][x]) {
+                            std::cout << "💣 PERDISTE\n";
+                        }
+                        if (verificarVictoria()) {
+                        std::cout << "🎉 GANASTE\n";
+                        }
                     }
                 }
             }

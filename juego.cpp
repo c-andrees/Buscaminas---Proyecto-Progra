@@ -14,7 +14,11 @@ void dibujarTablero(sf::RenderWindow& window,
             celda.setPosition(
                 sf::Vector2f(j * TAM, i * TAM));
 
-            if (descubierta[i][j]) {
+            if (banderas[i][j]) {
+                celda.setFillColor(sf::Color::Yellow);
+            }
+            
+            else if (descubierta[i][j]) {
 
                 if (minas[i][j])
                     celda.setFillColor(sf::Color::Red);

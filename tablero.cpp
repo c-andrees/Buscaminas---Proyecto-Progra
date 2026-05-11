@@ -3,6 +3,7 @@
 
 bool descubierta[FILAS][COLUMNAS] = {false};
 bool minas[FILAS][COLUMNAS] = {false};
+bool banderas[FILAS][COLUMNAS] = {false};
 
 void generarMinas(int totalMinas) {
 
@@ -46,7 +47,7 @@ void destapar(int f, int c) {
     if (f < 0 || f >= FILAS ||
         c < 0 || c >= COLUMNAS)
         return;
-
+    
     if (descubierta[f][c])
         return;
 
@@ -68,3 +69,23 @@ void destapar(int f, int c) {
     }
 }
 
+void toggleBandera (int f, int c) {
+
+                if (!descubierta[f][c]) {
+                    banderas[f][c] = !banderas[f][c];
+                }
+}
+
+bool verificarVictoria() {
+    for (int i = 0; i < FILAS; i++) {
+        for (int j = 0; j < COLUMNAS; j++) {
+
+            // si NO es mina y NO está descubierta 
+            if (minas[i][j] && !banderas[i][j]) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
