@@ -18,3 +18,4 @@ bool verificarVictoria();
 
 void toggleBandera(int f, int c);
 
+void reiniciarJuego(int totalMINAS);

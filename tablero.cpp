@@ -89,3 +89,19 @@ bool verificarVictoria() {
     
     return true;
 }
+
+void reiniciarJuego(int totalMINAS) {
+
+    //limpiar matrices 
+    
+    for (int i = 0; i < FILAS; i++) {
+        for (int j = 0; j < COLUMNAS; j++) {
+
+            descubierta[i][j] = false;
+            minas[i][j] = false;
+            banderas[i][j] = false;
+        }
+    }
+    //generar nuevas minas
+    generarMinas(totalMINAS);
+}
