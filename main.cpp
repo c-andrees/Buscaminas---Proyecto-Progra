@@ -9,13 +9,14 @@ int main() {
 
     srand(time(0));
 
-    const int TAM = 60;
+    const int TAM = 50;
 
     bool juegoTerminado = false;
     bool victoria = false;
+    bool enMenu = true;
 
     sf::RenderWindow window(
-        sf::VideoMode({700, 700}),
+        sf::VideoMode({600, 600}),
         "Buscaminas");
 
     sf::Font font;
@@ -34,7 +35,8 @@ int main() {
                 window.close();
 
             if (!juegoTerminado) {
-
+                
+                //Manejo del mouse
                 if (event->is<sf::Event::MouseButtonPressed>()) {
 
                     auto mouse =
@@ -57,14 +59,15 @@ int main() {
                                 juegoTerminado = true;
                             }
                             if (verificarVictoria()) {
-                            std::cout << "GANASTE"<<std::endl;
-                            juegoTerminado = true;
-                            victoria = true;
+                                std::cout << "GANASTE"<<std::endl;
+                                juegoTerminado = true;
+                                victoria = true;
                             }
                         }
                     }
                 }
             }
+            //Manejo del teclado 
             if (event->is<sf::Event::KeyPressed>()) {
                 auto key =
                     event->getIf<sf::Event::KeyPressed>();
@@ -75,12 +78,38 @@ int main() {
                     victoria = false;
 
                     std::cout << "Juego reiniciado" << std::endl;
-                    }
+                }
+                if (key->code == sf::Keyboard::Key::Enter) {
+                    enMenu = false ;;
+                }
             }
         }
 
         window.clear();
 
+        if (enMenu) {
+            sf::Text titulo(font);
+            titulo.setString("BUSCAMINAS");
+            titulo.setCharacterSize(40);
+            titulo.setFillColor(sf::Color::White);
+            titulo.setPosition(
+                sf::Vector2f(150, 150));
+            
+            sf::Text iniciar(font);
+            iniciar.setString("Presiona ENTER para jugar");
+            iniciar.setCharacterSize(25);
+            iniciar.setFillColor(sf::Color::White);
+            iniciar.setPosition(
+                sf::Vector2f(120, 300));
+
+            window.draw(titulo);
+            window.draw(iniciar);
+
+            window.display();
+
+            continue;
+        }
+    
         dibujarTablero(window, font, TAM);
 
         window.display();
